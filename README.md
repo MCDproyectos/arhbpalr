@@ -3,7 +3,7 @@
 <img width="1610" height="554" alt="image" src="https://github.com/user-attachments/assets/a1b7d23f-94ed-460a-a739-f86dea750477" />
 
 
-==============================
+==========================================================================================
 
 Este proyecto utiliza técnicas de ciencia de datos e ingeniería de características para evaluar la importancia actual de la presa Abelardo L. Rodríguez en Hermosillo, Sonora, como un sistema socio-ecológico vital. A través del análisis de datos hidrológicos, climáticos y de biodiversidad, buscamos cuantificar su rol en la recarga de acuíferos y como soporte de un ecosistema clave, con un enfoque especial en la avifauna.
 
