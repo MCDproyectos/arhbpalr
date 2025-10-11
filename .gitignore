@@ -32,8 +32,6 @@ wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -158,28 +156,23 @@ Thumbs.db
 
 # Data files (Cookiecutter Data Science standard)
 # Keep structure but ignore large data files
-/data/raw/*.csv
-/data/raw/*.xlsx
-/data/raw/*.xls
-/data/interim/*.csv
-/data/processed/*.csv
-/data/external/*.csv
-
-# Keep example/small files for documentation
-!/data/raw/.gitkeep
-!/data/interim/.gitkeep
-!/data/processed/.gitkeep
-!/data/external/.gitkeep
-
-# Models
-/models/*.pkl
-/models/*.h5
-/models/*.joblib
-/models/*.pt
-/models/*.pth
+arhbpalr/data/raw/*.csv
+arhbpalr/data/raw/*.xlsx
+arhbpalr/data/raw/*.xls
+arhbpalr/data/interim/*.csv
+arhbpalr/data/processed/*.csv
+arhbpalr/data/external/*.csv
 
 # Keep .gitkeep files
 !.gitkeep
+!arhbpalr/data/*/.gitkeep
+
+# Models
+arhbpalr/models/*.pkl
+arhbpalr/models/*.h5
+arhbpalr/models/*.joblib
+arhbpalr/models/*.pt
+arhbpalr/models/*.pth
 
 # Claude Code specific
 .claude/
