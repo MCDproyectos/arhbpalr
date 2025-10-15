@@ -28,3 +28,7 @@ missingno>=0.5.0
 # Jupyter (optional, for running notebooks)
 jupyter>=1.0.0
 ipykernel>=6.0.0
+nbconvert>=6.0.0
+
+# Progress bars for notebooks
+tqdm>=4.62.0

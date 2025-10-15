@@ -27,7 +27,18 @@ pip install -r requirements.txt
 
 ### 2. Obtención de datos
 
-Los datos se obtienen mediante tres notebooks ejecutados en secuencia:
+#### Opción A: Pipeline automatizado (recomendado)
+
+```bash
+# Ejecutar todo el pipeline de obtención de datos automáticamente
+make pipeline
+```
+
+Este comando ejecutará automáticamente los 4 notebooks en secuencia y verificará que todos los datos se hayan obtenido correctamente. **Tiempo estimado: 4-5 horas**.
+
+#### Opción B: Ejecución manual
+
+Los datos se obtienen mediante cuatro notebooks ejecutados en secuencia:
 
 1. **`1.0-mcd-obtencion-datos-presa.ipynb`**
    - Obtiene datos históricos de almacenamiento de la presa mediante web scraping
@@ -46,10 +57,36 @@ Los datos se obtienen mediante tres notebooks ejecutados en secuencia:
    - Estrategia: OUTER JOIN para preservar todos los registros históricos
    - Salida: `data/processed/datos_hidrologicos_completos.csv`
 
+4. **`4.0-mcd-obtencion-datos-avifauna.ipynb`** ⭐ NUEVO
+   - Obtiene datos históricos de avistamientos de aves desde eBird API
+   - Rango temporal: 1947-2025 (alineado con datos de presa)
+   - Localización: Presa Abelardo L. Rodríguez (L506196)
+   - Sistema robusto con reintentos, manejo de rate limits y checkpoints
+   - Salidas:
+     - `data/raw/avistamientos_ebird_raw.csv`
+     - `data/processed/avistamientos_aves_presa.csv`
+   - Tiempo estimado de ejecución: ~4 horas
+
 ### 3. Análisis
 
-Una vez obtenidos los datos fusionados, el dataset `datos_hidrologicos_completos.csv` está listo para análisis exploratorio, modelado y visualizaciones.
+Una vez obtenidos los datos fusionados y de avifauna, los datasets están listos para análisis que integren:
+- Correlaciones entre niveles de agua y biodiversidad de aves
+- Patrones estacionales de avifauna
+- Impacto del ecosistema de la presa en especies migratorias y residentes
+- Análisis exploratorio, modelado y visualizaciones
 
+
+## Comandos Make disponibles
+
+El proyecto incluye un Makefile con comandos útiles para gestionar el proyecto:
+
+```bash
+make help              # Muestra todos los comandos disponibles
+make requirements      # Instala todas las dependencias de Python
+make pipeline          # Ejecuta el pipeline completo de obtención de datos (4-5 horas)
+make clean             # Elimina archivos compilados de Python
+make lint              # Ejecuta flake8 para verificar el código
+```
 
 ## Hipótesis
 A pesar de la disminución de su capacidad de almacenamiento por el azolve, el embalse de la presa Abelardo L. Rodríguez sigue funcionando como un regulador hídrico crucial para la recarga de acuíferos y sostiene un ecosistema de alta biodiversidad, especialmente de avifauna, cuya pérdida no se ha considerado en la propuesta de su clausura.

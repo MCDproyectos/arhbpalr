@@ -159,9 +159,14 @@ Thumbs.db
 arhbpalr/data/raw/*.csv
 arhbpalr/data/raw/*.xlsx
 arhbpalr/data/raw/*.xls
+arhbpalr/data/raw/*.json
 arhbpalr/data/interim/*.csv
 arhbpalr/data/processed/*.csv
 arhbpalr/data/external/*.csv
+
+# Checkpoint files from long-running notebooks
+arhbpalr/data/raw/checkpoint_*.json
+arhbpalr/data/raw/*_checkpoint.csv
 
 # Keep .gitkeep files
 !.gitkeep
