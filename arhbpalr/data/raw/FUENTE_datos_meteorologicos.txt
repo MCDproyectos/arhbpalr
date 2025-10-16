@@ -1,0 +1,101 @@
+# FUENTE DE DATOS: Datos Meteorológicos Históricos
+
+## Información de la Fuente
+
+**Nombre de la fuente:** Open-Meteo Historical Weather API
+**URL:** https://open-meteo.com/
+**Documentación:** https://open-meteo.com/en/docs/historical-weather-api
+**Tipo de fuente:** API REST pública
+**Fecha de descarga:** 2025-10-15 22:50:46
+**Método de obtención:** HTTP GET requests a la API
+
+## Ubicación
+
+**Coordenadas:** Lat: 29.067999, Lon: -110.910734
+**Localización:** Presa Abelardo L. Rodríguez, Hermosillo, Sonora, México
+
+## Descripción de los Datos
+
+### Archivo 1: Datos Básicos
+
+**Archivo:** `datos_meteorologicos_basicos.csv`
+**Tamaño:** 512.62 KB
+**Registros:** 31,047
+**Periodo:** 1940-01-01 a 2024-12-31
+
+**Variables:**
+- `fecha`: Fecha de la medición
+- `evapotranspiracion_mm_dia`: Evapotranspiración de referencia ET0 (FAO) en mm/día
+
+### Archivo 2: Datos Completos
+
+**Archivo:** `datos_meteorologicos_completos.csv`
+**Tamaño:** 2821.31 KB
+**Registros:** 31,047
+**Periodo:** 1940-01-01 a 2024-12-31
+
+**Variables (18 columnas):**
+1. `fecha`: Fecha de medición
+2. `precipitacion_mm`: Precipitación total diaria (mm)
+3. `lluvia_mm`: Lluvia diaria (mm)
+4. `evapotranspiracion_mm`: Evapotranspiración ET0 FAO (mm)
+5. `temp_media_c`: Temperatura media (°C)
+6. `temp_max_c`: Temperatura máxima (°C)
+7. `temp_min_c`: Temperatura mínima (°C)
+8. `horas_precipitacion`: Horas con precipitación
+9. `viento_max_km_h`: Velocidad máxima del viento (km/h)
+10. `viento_medio_km_h`: Velocidad media del viento (km/h)
+11. `deficit_presion_vapor_kpa`: Déficit de presión de vapor (kPa)
+12. `radiacion_solar_mj_m2`: Radiación solar (MJ/m²)
+13. `humedad_relativa_pct`: Humedad relativa (%)
+14. `cobertura_nubes_pct`: Cobertura de nubes (%)
+15. `humedad_suelo_0_100cm`: Humedad del suelo 0-100cm (m³/m³)
+16. `humedad_suelo_0_7cm`: Humedad del suelo 0-7cm (m³/m³)
+17. `humedad_suelo_28_100cm`: Humedad del suelo 28-100cm (m³/m³)
+18. `humedad_suelo_7_28cm`: Humedad del suelo 7-28cm (m³/m³)
+
+
+## Naturaleza de los Datos
+
+Open-Meteo combina múltiples fuentes de reanálisis meteorológico (ERA5, NCEP, etc.)
+para proporcionar datos históricos consistentes y de alta calidad. Estos datos son
+esenciales para entender las condiciones climáticas que afectan el llenado y
+vaciado de la presa.
+
+Las variables meteorológicas incluyen tanto datos básicos (evapotranspiración)
+como un conjunto completo de variables para análisis hidrológico detallado.
+
+## Calidad de Datos
+
+- No hay valores faltantes significativos
+- Datos validados por Open-Meteo
+- Cobertura temporal completa para el periodo especificado
+- Resolución diaria
+- Zona horaria: America/Los_Angeles (ajustada automáticamente)
+
+## Uso Recomendado
+
+Estos datos pueden utilizarse para:
+- Análisis de balance hídrico
+- Estudios de evapotranspiración
+- Correlación con niveles de almacenamiento de la presa
+- Análisis de patrones climáticos históricos
+- Modelado hidrológico
+
+## Limitaciones y Consideraciones
+
+- Los datos de reanálisis pueden tener incertidumbre en zonas con pocas estaciones
+- La evapotranspiración ET0 es un valor de referencia (FAO Penman-Monteith)
+- La humedad del suelo es modelada, no medida directamente
+- API gratuita con límites: 600 req/min, 5,000 req/hora, 10,000 req/día
+
+## Contacto y Licencia
+
+**Proveedor:** Open-Meteo
+**Licencia:** Attribution 4.0 International (CC BY 4.0)
+**Atribución requerida:** "Data provided by Open-Meteo.com"
+**Script de obtención:** `src/data/02_obtener_datos_meteo.py`
+
+---
+Generado automáticamente por el pipeline de datos
+Fecha de generación: 2025-10-15 22:50:46

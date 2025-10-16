@@ -1,0 +1,63 @@
+# FUENTE DE DATOS: Presa Abelardo L. Rodríguez
+
+## Información de la Fuente
+
+**Nombre de la fuente:** Portal de Sonora Datos Abiertos
+**URL:** https://datos.sonora.gob.mx/dataset/Recursos%20H%C3%ADdricos
+**Tipo de fuente:** Web scraping de datos gubernamentales
+**Fecha de descarga:** 2025-10-15 22:50:38
+**Método de obtención:** Web scraping con BeautifulSoup y requests
+
+## Descripción de los Datos
+
+**Archivo generado:** `datos_presa_arlso.csv`
+**Tamaño del archivo:** 644.04 KB
+**Número de registros:** 24,631
+**Periodo cubierto:** 1947-04-14 a 2024-09-19
+
+**Descripción:**
+Datos históricos diarios de almacenamiento de agua en la Presa Abelardo L.
+Rodríguez, ubicada en Hermosillo, Sonora. Los datos incluyen:
+- Fecha de medición
+- Volumen de almacenamiento en hectómetros cúbicos (hm³)
+
+## Naturaleza de los Datos
+
+Estos datos son registros oficiales del gobierno del estado de Sonora sobre los
+niveles de agua en la presa. Son cruciales para entender la disponibilidad hídrica
+y la capacidad de almacenamiento del embalse a lo largo de casi 80 años.
+
+Los datos originales se encuentran en múltiples archivos Excel organizados por
+décadas, que fueron consolidados y filtrados para obtener únicamente los registros
+de la Presa Abelardo L. Rodríguez (clave: ARLSO).
+
+## Estructura de los Datos
+
+**Columnas:**
+1. `fecha`: Fecha de la medición (formato YYYY-MM-DD)
+2. `almacenamiento_hm3`: Volumen de agua almacenado en hectómetros cúbicos
+
+**Calidad de datos:**
+- No hay valores faltantes en las fechas con registros
+- Valores numéricos validados (convertidos con manejo de errores)
+- Fechas ordenadas cronológicamente
+- Registros duplicados removidos
+
+## Uso Recomendado
+
+Estos datos pueden utilizarse para:
+- Análisis de tendencias históricas del almacenamiento
+- Estudios de disponibilidad hídrica
+- Correlación con datos meteorológicos
+- Evaluación del impacto del cambio climático
+- Planificación de recursos hídricos
+
+## Contacto y Licencia
+
+**Organización:** Gobierno del Estado de Sonora
+**Licencia:** Datos abiertos gubernamentales
+**Script de obtención:** `src/data/01_obtener_datos_presa.py`
+
+---
+Generado automáticamente por el pipeline de datos
+Fecha de generación: 2025-10-15 22:50:38
