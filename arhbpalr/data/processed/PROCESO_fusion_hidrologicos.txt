@@ -1,0 +1,138 @@
+# PROCESO: Fusión de Datos Hidrológicos y Meteorológicos
+
+## Información del Proceso
+
+**Fecha de procesamiento:** 2025-10-15 22:50:47
+**Script de procesamiento:** `src/data/03_fusion_hidrologicos.py`
+**Tipo de proceso:** Fusión de datasets (OUTER JOIN)
+
+## Archivos de Entrada
+
+### 1. Datos de Presa (datos_presa_arlso.csv)
+- **Periodo:** 1947-04-14 a 2024-09-19
+- **Fuente:** Portal de Sonora Datos Abiertos
+- **Variable principal:** almacenamiento_hm3
+
+### 2. Datos Meteorológicos (datos_meteorologicos_completos.csv)
+- **Periodo:** 1940-01-01 a 2024-12-31
+- **Fuente:** Open-Meteo Historical Weather API
+- **Variables:** 18 variables meteorológicas
+
+## Archivo de Salida
+
+**Archivo:** `datos_hidrologicos_completos.csv`
+**Ubicación:** data/processed/
+**Tamaño:** 3.05 MB
+**Registros:** 31,047
+**Columnas:** 20
+**Periodo:** 1940-01-01 a 2024-12-31
+
+### Variables Incluidas (20 columnas):
+
+**De la presa:**
+- `fecha`: Fecha de medición (YYYY-MM-DD)
+- `almacenamiento_hm3`: Volumen de agua en hectómetros cúbicos
+
+**Meteorológicas:**
+- `precipitacion_mm`: Precipitación total diaria (mm)
+- `lluvia_mm`: Lluvia diaria (mm)
+- `evapotranspiracion_mm`: Evapotranspiración ET0 FAO (mm)
+- `temp_media_c`: Temperatura media (°C)
+- `temp_max_c`: Temperatura máxima (°C)
+- `temp_min_c`: Temperatura mínima (°C)
+- `horas_precipitacion`: Horas con precipitación
+- `viento_max_km_h`: Velocidad máxima del viento (km/h)
+- `viento_medio_km_h`: Velocidad media del viento (km/h)
+- `deficit_presion_vapor_kpa`: Déficit de presión de vapor (kPa)
+- `radiacion_solar_mj_m2`: Radiación solar (MJ/m²)
+- `humedad_relativa_pct`: Humedad relativa (%)
+- `cobertura_nubes_pct`: Cobertura de nubes (%)
+- `humedad_suelo_0_100cm`: Humedad del suelo 0-100cm (m³/m³)
+- `humedad_suelo_0_7cm`: Humedad del suelo 0-7cm (m³/m³)
+- `humedad_suelo_28_100cm`: Humedad del suelo 28-100cm (m³/m³)
+- `humedad_suelo_7_28cm`: Humedad del suelo 7-28cm (m³/m³)
+
+**Indicadora:**
+- `datos_completos`: Booleano - True si hay datos de presa Y meteorológicos
+
+## Estrategia de Fusión
+
+**Método utilizado:** OUTER JOIN (Unión completa)
+
+**Decisión:** Se utilizó `pd.merge()` con `how='outer'` para preservar **todas las fechas**
+de ambos datasets.
+
+**Razones:**
+1. **Máxima preservación de datos**: No se pierde información de ningún dataset
+2. **Análisis temporal completo**: Permite estudiar períodos con datos meteorológicos
+   pero sin mediciones de presa (y viceversa)
+3. **Flexibilidad analítica**: Los análisis posteriores pueden decidir cómo manejar
+   valores faltantes según el caso de uso
+
+**Alternativas descartadas:**
+- **INNER JOIN**: Perdería datos históricos valiosos donde solo existe uno de los datasets
+- **LEFT/RIGHT JOIN**: Sesgaría el dataset hacia una de las fuentes
+
+## Cobertura Temporal
+
+**Período de intersección (datos en común):**
+- Inicio: 1947-04-14
+- Fin: 2024-09-19
+- Días: 28,283
+
+**Análisis de fechas únicas:**
+- Fechas solo en datos de presa: 0
+- Fechas solo en datos meteorológicos: 6,416
+- Fechas en común (ambos datasets): 24,631
+
+## Completitud de Datos
+
+**Registros con datos completos:** 24,631 (79.3%)
+**Registros con datos incompletos:** 6,416 (20.7%)
+
+Los registros con datos incompletos corresponden principalmente a:
+- Fechas antes de 1940 (solo datos de presa, sin meteorología)
+- Fechas después de 2024-09-19 (solo meteorología, sin mediciones de presa)
+
+## Manejo de Valores Faltantes
+
+- Los valores faltantes se marcan como `NaN` en pandas
+- La columna `datos_completos` permite filtrar rápidamente registros completos
+- Para análisis de correlación: usar `df[df['datos_completos'] == True]`
+- Para series temporales: considerar interpolación según el caso de uso
+
+## Calidad de Datos
+
+- Sin duplicados en fechas
+- Fechas ordenadas cronológicamente
+- Tipos de datos correctos (datetime para fechas, float para valores numéricos)
+- Preservación de todos los datos originales
+- Indicador de completitud para facilitar análisis
+
+## Uso Recomendado
+
+Este dataset puede utilizarse para:
+- **Análisis de correlación** entre niveles de agua y variables meteorológicas
+- **Modelado predictivo** del almacenamiento basado en clima
+- **Estudios de balance hídrico** combinando precipitación y evapotranspiración
+- **Análisis de series temporales** con variables hidrometeorológicas
+- **Identificación de patrones** climáticos que afectan el llenado de la presa
+
+## Procesamiento Aplicado
+
+1. Carga de datasets de entrada con validación de existencia
+2. Conversión de fechas a formato datetime
+3. Fusión OUTER JOIN en columna 'fecha'
+4. Ordenamiento cronológico
+5. Creación de columna indicadora de completitud
+6. Análisis de valores faltantes por columna y por año
+7. Guardado en formato CSV en data/processed/
+
+## Referencias
+
+- **Datos de presa:** Ver FUENTE_datos_presa.txt
+- **Datos meteorológicos:** Ver FUENTE_datos_meteorologicos.txt
+
+---
+Generado automáticamente por el pipeline de datos
+Fecha de generación: 2025-10-15 22:50:47
