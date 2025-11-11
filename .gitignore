@@ -161,7 +161,6 @@ arhbpalr/data/raw/*.xlsx
 arhbpalr/data/raw/*.xls
 arhbpalr/data/raw/*.json
 arhbpalr/data/interim/*.csv
-arhbpalr/data/processed/*.csv
 arhbpalr/data/external/*.csv
 
 # Checkpoint files from long-running notebooks

@@ -162,7 +162,6 @@ Thumbs.db
 /data/raw/*.xlsx
 /data/raw/*.xls
 /data/interim/*.csv
-/data/processed/*.csv
 /data/external/*.csv
 
 # Keep example/small files for documentation
